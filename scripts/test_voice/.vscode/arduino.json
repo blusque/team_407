@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:mega",
+    "configuration": "cpu=atmega2560",
+    "sketch": "test_voice - 副本\\voice_dist\\main.ino"
+}
