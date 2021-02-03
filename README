@@ -14,4 +14,4 @@
 "test_voice"文件夹用于存放超声波代码；
 "test_trace"文件夹用于存放红外循迹代码。
 
-文件夹"bugs"用于测试者反映已知bug。
+Issues板块用于测试者反映已知bug。
