@@ -1,4 +1,4 @@
-//本代码摘自网络，网址：https://blog.csdn.net/qq_16775293/article/details/77744682
+//本代码摘自网络，网址：https://blog.csdn.net/qq_16775293/article/details/77744682，有改动
 //请注意串口连接，与小组内写的不同
 //请在测试完成之后将图片截图发在群里
 
@@ -6,7 +6,11 @@ int leftCounter = 0, rightCounter = 0;
 unsigned long time = 0, old_time = 0; // 时间标记
 unsigned long time1 = 0;              // 时间标记
 float lv, rv;                         //左、右轮速度
+int turn = 0;
+//轮半径，需要修改（8是我乱填的^_^)
+const int r = 8*2*M_PI;//单位cm
 
+//注意这个地方，有宏定义
 #define STOP 0
 #define FORWARD 1
 #define BACKWARD 2
@@ -43,21 +47,29 @@ void loop()
     // put your main code here, to run repeatedly:
     SpeedDetection();
 
-    if (Serial.available() > 0)
+    if (!turn)
     {
-        char cmd = Serial.read();
+        turn++;
+        Serial.println("Speed(cm/s)");
+    }
+    else
+    {
+        if (Serial.available() > 0)
+        {
+            char cmd = Serial.read();
 
-        Serial.print(cmd);
-        motorRun(cmd);
-        if (speedLevel) //根据不通的档位输出不同速度
-        {
-            analogWrite(leftPWM, 120);
-            analogWrite(rightPWM, 120);
-        }
-        else
-        {
-            analogWrite(leftPWM, 200);
-            analogWrite(rightPWM, 200);
+            Serial.print(cmd);
+            motorRun(cmd);
+            if (speedLevel) //根据不通的档位输出不同速度
+            {
+                analogWrite(leftPWM, 120);
+                analogWrite(rightPWM, 120);
+            }
+            else
+            {
+                analogWrite(leftPWM, 200);
+                analogWrite(rightPWM, 200);
+            }
         }
     }
 }
@@ -73,13 +85,13 @@ bool SpeedDetection()
         detachInterrupt(1); // 关闭外部中断1
         //把每一秒钟编码器码盘计得的脉冲数，换算为当前转速值
         //转速单位是每分钟多少转，即r/min。这个编码器码盘为20个空洞。
-        Serial.print("left:");
+        //Serial.print("left:");
         lv = (float)leftCounter * 60 / 20;  //小车车轮电机转速
         rv = (float)rightCounter * 60 / 20; //小车车轮电机转速
-        Serial.print("left:");
-        Serial.print(lv); //向上位计算机上传左车轮电机当前转速的高、低字节
-        Serial.print("     right:");
-        Serial.println(rv); //向上位计算机上传左车轮电机当前转速的高、低字节
+        Serial.print("left speed:");
+        Serial.print(lv*r); //向上位计算机上传左车轮电机当前转速的高、低字节
+        Serial.print("     right speed:");
+        Serial.println(rv*r); //向上位计算机上传左车轮电机当前转速的高、低字节
         //恢复到编码器测速的初始状态
         leftCounter = 0; //把脉冲计数值清零，以便计算下一秒的脉冲计数
         rightCounter = 0;
@@ -147,6 +159,7 @@ void motorRun(int cmd)
         else
             speedLevel = 1;
         break;
+    case 'q':
     default:
         Serial.println("STOP"); //输出状态
         digitalWrite(leftMotor1, LOW);
