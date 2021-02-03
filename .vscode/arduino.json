@@ -1,5 +1,6 @@
 {
     "board": "arduino:avr:mega",
     "configuration": "cpu=atmega2560",
-    "programmer": "AVR ISP"
+    "programmer": "AVR ISP",
+    "sketch": "scripts\\test_trace\\test_trace.ino"
 }

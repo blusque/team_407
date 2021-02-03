@@ -133,6 +133,14 @@ void setup()
     s2.d2 = 6;
     s2.d3 = 7;
     s2.d4 = 8;
+    pinMode(1, OUTPUT);
+    pinMode(2, OUTPUT);
+    pinMode(3, OUTPUT);
+    pinMode(4, OUTPUT);
+    pinMode(5, OUTPUT);
+    pinMode(6, OUTPUT);
+    pinMode(7, OUTPUT);
+    pinMode(8, OUTPUT);
     //这个是乱写的，可根据接线修改
     int pos = 90;
     myServo.write(pos);
