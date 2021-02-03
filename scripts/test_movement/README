@@ -1,0 +1,20 @@
+本测试为基本运动函数测试，测试内容主要有：
+1.串口测试（文件夹chuankouceshi^_^）
+2.基本运动测试，主要测试能否按照程序所设定的方式运动（文件夹movement）
+3.马达转速测试，通过霍尔传感器测试轮子转速，测试完成之后把数据给我，我来处理就好（文件夹ceshi)
+注意测试时需要从电脑中输入数据才可以开始，以下是文件中的宏定义，请注意
+#define STOP 0
+#define FORWARD 1
+#define BACKWARD 2
+#define TURNLEFT 3
+#define TURNRIGHT 4
+#define CHANGESPEED 5
+再次停止时输入'q'
+！！！
+记得修改轮径！！！（在ceshi.ino第11行）
+！！！
+
+霍尔传感器器测转速资料可参考：
+1.百度百科https://baike.baidu.com/item/%E9%9C%8D%E5%B0%94%E6%95%88%E5%BA%94%E5%BC%8F%E8%BD%AC%E9%80%9F%E4%BC%A0%E6%84%9F%E5%99%A8
+2.霍尔传感器测转速小实验https://www.jianshu.com/p/a91861c6c08b
+3.
