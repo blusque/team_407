@@ -59,7 +59,7 @@ void loop()
             char cmd = Serial.read();
 
             Serial.print(cmd);
-            motorRun(cmd);
+            motorRun(cmd - '0');
             if (speedLevel) //根据不通的档位输出不同速度
             {
                 analogWrite(leftPWM, 120);
